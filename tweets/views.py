@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import Http404
+from django.http import Http404, JsonResponse
 
 from .models import Tweet
 
@@ -12,13 +12,20 @@ def home_view(request, *args, **kwargs):
 
 
 def tweet_detail_view(request, tweet_id, *args, **kwargs):
+    """
+    REST API VIEW
+    Consume by JavaScript or React/React Native/VueJS//IOS/Android
+    return JSON data
+    """
+    data = {
+        "id": tweet_id,
+    }
+    status = 200
     try:
         obj = Tweet.objects.get(id=tweet_id)
+        data['content'] = obj.content
     except:
-        #raise Http404
-        return render(request, 'tweets/home.html', context={'content': '404 Error'})
+        data['message'] = "Not found"
+        status = 404
 
-    context = {
-        'content': obj.content,
-    }
-    return render(request, 'tweets/home.html', context)
+    return JsonResponse(data, status=status)
