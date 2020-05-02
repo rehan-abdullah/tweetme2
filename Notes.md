@@ -17,6 +17,8 @@
 - **AJAX** - Asynchronous JavaScript Requests, allows Django and React 
 to communicate without reloading a webpage
 - **JavaScript Clients** - React, VueJS, AngularJS
+- **Pipfiles** - e.g.
+    >pipenv install --python 3.6 django==2.2
 - **-m** - https://docs.python.org/3.1/using/cmdline.html
 - Put a **period** at the end of 'startproject' to create a Django project 
 in the same directory as the pipfiles without **subdirectories**:
@@ -26,7 +28,7 @@ create a run config by going to 'Settings>Project: PROJECT_NAME>Python Interpret
 select existing interpreter and add the Pipenv project interpreter.
 Now you should be able to run the server using PyCharm's run interface.
 - **Pylint** - Install with Pipenv to pifile dev-packages:
-    >pipenv install pylint --dev
+    >pipenv install flake8 --dev
 
 - To run Pylint:
     >pylint <MODULE/DIRECTORY>
