@@ -8,7 +8,7 @@ def home_view(request, *args, **kwargs):
     context = {
         'content': 'Hello World!',
     }
-    return render(request, 'tweets/home.html', context)
+    return render(request, 'pages/home.html', context)
 
 
 def tweet_detail_view(request, tweet_id, *args, **kwargs):
