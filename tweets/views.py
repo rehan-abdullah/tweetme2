@@ -5,10 +5,7 @@ from .models import Tweet
 
 
 def home_view(request, *args, **kwargs):
-    context = {
-        'content': 'Hello World!',
-    }
-    return render(request, 'pages/home.html', context)
+    return render(request, 'pages/home.html')
 
 
 def tweet_list_view(request,*args, **kwargs):
@@ -22,6 +19,7 @@ def tweet_list_view(request,*args, **kwargs):
     # List comprehension
     tweets_list = [{"id": obj.id, "content": obj.content} for obj in qs]
     data = {
+        "isUser": False,
         "response": tweets_list
     }
     return JsonResponse(data)
