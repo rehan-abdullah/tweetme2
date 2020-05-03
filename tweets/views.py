@@ -11,6 +11,22 @@ def home_view(request, *args, **kwargs):
     return render(request, 'pages/home.html', context)
 
 
+def tweet_list_view(request,*args, **kwargs):
+    """
+    REST API VIEW
+    Consume by JavaScript or React/React Native/VueJS//IOS/Android
+    return JSON data
+    """
+    # Query string
+    qs = Tweet.objects.all()
+    # List comprehension
+    tweets_list = [{"id": obj.id, "content": obj.content} for obj in qs]
+    data = {
+        "response": tweets_list
+    }
+    return JsonResponse(data)
+
+
 def tweet_detail_view(request, tweet_id, *args, **kwargs):
     """
     REST API VIEW
