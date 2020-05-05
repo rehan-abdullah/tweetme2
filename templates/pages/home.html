@@ -20,8 +20,23 @@
       const url = "/tweets";
       const responseType = "json";
 
+      function handleDidLike(tweet_id, currentCount) {
+          console.log(`Tweet ${tweet_id} likes: ${currentCount}`)
+		      return
+      }
+
+      function LikeBtn(tweet) {
+          return `<button class='btn btn-primary btn-sm' onClick="handleDidLike(${tweet.id}, ${tweet.likes})">
+										${tweet.likes} Like
+									</button>`
+      }
+
       function formatTweetElement(tweet) {
-          return `<div class='mb-4 tweet' id='"tweet${tweet.id}"'><h1>${tweet.id}</h1><p>${tweet.content}</p></div>`
+          return `<div class='mb-4 tweet' id='"tweet${tweet.id}"'>
+										<h1>${tweet.id}</h1>
+										<p>${tweet.content}</p>
+										<div class='btn-group'>${LikeBtn(tweet)}</div>
+									</div>`
       }
 
       xhr.responseType = responseType;
