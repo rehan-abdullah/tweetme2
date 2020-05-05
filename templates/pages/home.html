@@ -7,34 +7,39 @@
 {% block content %}
 	<div class="container">
 		<h1>Welcome to Tweetme2</h1>
-
+		<br>
 		<div id="tweets">
-			Replace me
+			Loading...
 		</div>
 	</div>
 
 	<script>
-			const tweetsElement = document.getElementById("tweets")
-			tweetsElement.innerHTML = 'Loading...'
+      const tweetsElement = document.getElementById("tweets");
+      const xhr = new XMLHttpRequest();
+      const method = 'GET';
+      const url = "/tweets";
+      const responseType = "json";
 
-			let element1 = "<h1>Hello 1</h1>"
-			let element2 = "<h1>Hello 2</h1>"
-			let element3 = "<h1>Hello 3</h1>"
-			tweetsElement.innerHTML = element1 + element2 +element3
+      function formatTweetElement(tweet) {
+          return `<div class='mb-4 tweet' id='"tweet${tweet.id}"'><h1>${tweet.id}</h1><p>${tweet.content}</p></div>`
+      }
 
-			const xhr = new XMLHttpRequest()
-			const method = 'GET'
-			const url = "/tweets"
-			const responseType = "json"
+      xhr.responseType = responseType;
+      xhr.open(method, url);
 
-			xhr.responseType = responseType
-			xhr.open(method, url)
-			xhr.onload = function() {
-					const serverResponse = xhr.response
-					let listedItems = serverResponse.response
-					console.log(listedItems)
-			}
-			xhr.send()
+      xhr.onload = function() {
+          const serverResponse = xhr.response;
+          const listedItems = serverResponse.response;
+          let i;
+          tweetsElement.innerHTML = '';
+          for (i=0;i<listedItems.length;i++) {
+              let tweet = listedItems[i];
+              console.log(`Tweet ${tweet.id} - ${tweet.content}`);
+              tweetsElement.innerHTML += formatTweetElement(tweet);
+          }
+      }
+
+      xhr.send();
 
 
 	</script>
