@@ -5,9 +5,23 @@
 {% endblock head_title %}
 
 {% block content %}
-	<h1>Welcome to Tweetme2</h1>
+	<div class="container">
+		<h1>Welcome to Tweetme2</h1>
+
+		<div id="tweets">
+			Replace me
+		</div>
+	</div>
 
 	<script>
+			const tweetsElement = document.getElementById("tweets")
+			tweetsElement.innerHTML = 'Loading...'
+
+			let element1 = "<h1>Hello 1</h1>"
+			let element2 = "<h1>Hello 2</h1>"
+			let element3 = "<h1>Hello 3</h1>"
+			tweetsElement.innerHTML = element1 + element2 +element3
+
 			const xhr = new XMLHttpRequest()
 			const method = 'GET'
 			const url = "/tweets"
